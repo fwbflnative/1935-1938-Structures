@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>1935-1938 Structures Map</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+        }
+        #map {
+            width: 100%;
+            height: 100vh;
+        }
+        .map-title {
+            position: absolute;
+            top: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: white;
+            padding: 10px 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+            z-index: 1000;
+            font-size: 18px;
+            font-weight: 600;
+            color: #333;
+        }
+        .leaflet-popup-content {
+            font-size: 14px;
+        }
+        .leaflet-popup-content-wrapper {
+            border-radius: 8px;
+        }
+    </style>
+</head>
+<body>
+    <div class="map-title">1935-1938 Structures</div>
+    <div id="map"></div>
+
+    <script>
+        // Initialize map - centered on the approximate middle of all points
+        const map = L.map('map').setView([30.58, -86.45], 10);
+
+        // Add OpenStreetMap tiles
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '© OpenStreetMap contributors',
+            maxZoom: 19
+        }).addTo(map);
+
+        // Create custom icons
+        const redIcon = L.icon({
+            iconUrl: 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzIiIGhlaWdodD0iNDgiIHZpZXdCb3g9IjAgMCAzMiA0OCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cGF0aCBkPSJNMTYgMEMxMC40NzcgMCA2IDQuNDc3IDYgMTBjMCAxMCAxMCAxOCAxMCAyOHMxMC0xOCAxMC0yOGMwLTUuNTIzLTQuNDc3LTEwLTEwLTEweiIgZmlsbD0iI0ZGMzMzMyIgc3Ryb2tlPSIjOEIwMDAwIiBzdHJva2Utd2lkdGg9IjIiLz48Y2lyY2xlIGN4PSIxNiIgY3k9IjEwIiByPSI0IiBmaWxsPSIjRkZGIi8+PC9zdmc+',
+            iconSize: [24, 36],
+            iconAnchor: [12, 36],
+            popupAnchor: [0, -36]
+        });
+
+        const blueIcon = L.icon({
+            iconUrl: 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzIiIGhlaWdodD0iNDgiIHZpZXdCb3g9IjAgMCAzMiA0OCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cGF0aCBkPSJNMTYgMEMxMC40NzcgMCA2IDQuNDc3IDYgMTBjMCAxMCAxMCAxOCAxMCAyOHMxMC0xOCAxMC0yOGMwLTUuNTIzLTQuNDc3LTEwLTEwLTEweiIgZmlsbD0iIzMzOTlGRiIgc3Ryb2tlPSIjMDA1NUI4IiBzdHJva2Utd2lkdGg9IjIiLz48Y2lyY2xlIGN4PSIxNiIgY3k9IjEwIiByPSI0IiBmaWxsPSIjRkZGIi8+PC9zdmc+',
+            iconSize: [24, 36],
+            iconAnchor: [12, 36],
+            popupAnchor: [0, -36]
+        });
+
+        // Add the line feature
+        const lineCoordinates = [
+            [30.4801063215755, -86.5899820825532],
+            [30.4794076970594, -86.5899383826276],
+            [30.4785724400995, -86.5896527501829],
+            [30.4778821605143, -86.5895116371556],
+            [30.4770612288752, -86.5893859326532],
+            [30.4765654173357, -86.5892857928633],
+            [30.4765654173357, -86.5892857928633]
+        ];
+
+        L.polyline(lineCoordinates, {
+            color: '#FF2F80',
+            weight: 4,
+            opacity: 0.8
+        }).addTo(map).bindPopup('<b>Line 2</b>');
+
+        // Add all placemarks
+        const placemarks = [
+            {name: "Placemark 1", coords: [30.5065309955379, -86.6636742351065], icon: redIcon},
+            {name: "Placemark 1 (1)", coords: [30.4694869456584, -86.6845709203697], icon: blueIcon},
+            {name: "Placemark 1 (2)", coords: [30.6058864544278, -86.4515618091384], icon: redIcon},
+            {name: "Placemark 100", coords: [30.5245279692532, -86.1949625832702], icon: redIcon},
+            {name: "Placemark 101", coords: [30.5877951899033, -86.2170800659941], icon: redIcon},
+            {name: "Placemark 102", coords: [30.5845762688265, -86.1989172939736], icon: redIcon},
+            {name: "Placemark 103", coords: [30.604050098007, -86.2089753472096], icon: redIcon},
+            {name: "Placemark 104", coords: [30.6051209892698, -86.2181826051324], icon: redIcon},
+            {name: "Placemark 105", coords: [30.605309969675, -86.2169752110098], icon: redIcon},
+            {name: "Placemark 106", coords: [30.6054280848879, -86.2163753054749], icon: redIcon},
+            {name: "Placemark 107", coords: [30.605457874334, -86.215868363595], icon: redIcon},
+            {name: "Placemark 108", coords: [30.6059572376552, -86.2155233427625], icon: redIcon},
+            {name: "Placemark 109", coords: [30.6059659361573, -86.215933280259], icon: redIcon},
+            {name: "Placemark 110", coords: [30.6061391438483, -86.2166171584024], icon: redIcon},
+            {name: "Placemark 111", coords: [30.6062477067711, -86.2170645099707], icon: redIcon},
+            {name: "Placemark 112", coords: [30.6064708622828, -86.2178779457365], icon: redIcon},
+            {name: "Placemark 113", coords: [30.6067677649712, -86.2186895066392], icon: redIcon},
+            {name: "Placemark 114", coords: [30.60674222085, -86.2152783616329], icon: redIcon},
+            {name: "Placemark 115", coords: [30.6068196342441, -86.2161936170472], icon: redIcon},
+            {name: "Placemark 116", coords: [30.6074880993958, -86.2155692723852], icon: redIcon},
+            {name: "Placemark 117", coords: [30.6074160910461, -86.216430987121], icon: redIcon},
+            {name: "Placemark 118", coords: [30.6076130196337, -86.2169951046481], icon: redIcon},
+            {name: "Placemark 119", coords: [30.6078574181848, -86.2194529368629], icon: redIcon},
+            {name: "Placemark 120", coords: [30.6082380063151, -86.2194031337616], icon: redIcon},
+            {name: "Placemark 121", coords: [30.6085469382786, -86.2193658357099], icon: redIcon},
+            {name: "Placemark 122", coords: [30.6094783706079, -86.2165249470009], icon: redIcon},
+            {name: "Placemark 123", coords: [30.6092133454947, -86.2157810098566], icon: redIcon},
+            {name: "Placemark 124", coords: [30.6081741028235, -86.2132845724714], icon: redIcon},
+            {name: "Placemark 125", coords: [30.6072756734836, -86.2123056144937], icon: redIcon},
+            {name: "Placemark 126", coords: [30.6074064487899, -86.2114471468044], icon: redIcon},
+            {name: "Placemark 127", coords: [30.6075820789945, -86.2049452636326], icon: redIcon},
+            {name: "Placemark 128", coords: [30.611864979954, -86.2013086676385], icon: redIcon},
+            {name: "Placemark 129", coords: [30.6564790670099, -86.193635374959], icon: redIcon},
+            {name: "Placemark 130", coords: [30.6666083550127, -86.1915087602772], icon: redIcon},
+            {name: "Placemark 131", coords: [30.6609746515058, -86.1891274852518], icon: redIcon},
+            {name: "Placemark 132", coords: [30.6595862099278, -86.1873792502673], icon: redIcon},
+            {name: "Placemark 133", coords: [30.6151832463248, -86.1895536270766], icon: redIcon},
+            {name: "Placemark 134", coords: [30.6111696992528, -86.1810019488517], icon: redIcon},
+            {name: "Placemark 135", coords: [30.6064007261671, -86.1862371964156], icon: redIcon},
+            {name: "Placemark 136", coords: [30.6043722564345, -86.1879752161495], icon: redIcon},
+            {name: "Placemark 137", coords: [30.6160362209975, -86.1629721304465], icon: redIcon},
+            {name: "Placemark 138", coords: [30.6160303871884, -86.1642705893422], icon: redIcon},
+            {name: "Placemark 139", coords: [30.615849813853, -86.1639475128613], icon: redIcon},
+            {name: "Placemark 14", coords: [30.5588900203909, -86.5139710647791], icon: redIcon},
+            {name: "Placemark 140", coords: [30.6032321649859, -86.1736940717703], icon: redIcon},
+            {name: "Placemark 141", coords: [30.5989507681745, -86.1583718053742], icon: redIcon},
+            {name: "Placemark 142", coords: [30.5969055197837, -86.1707446068281], icon: redIcon},
+            {name: "Placemark 143", coords: [30.5354005454062, -86.1268437578961], icon: redIcon},
+            {name: "Placemark 144", coords: [30.5995071814182, -86.1554477925563], icon: redIcon},
+            {name: "Placemark 145", coords: [30.5990297666601, -86.1541446963461], icon: redIcon},
+            {name: "Placemark 146", coords: [30.5999471184231, -86.1481734467957], icon: redIcon},
+            {name: "Placemark 147", coords: [30.599788107365, -86.1387738401588], icon: redIcon},
+            {name: "Placemark 148", coords: [30.5922411438745, -86.1387731366561], icon: redIcon},
+            {name: "Placemark 149", coords: [30.5904189885476, -86.1374742658644], icon: redIcon},
+            {name: "Placemark 15", coords: [30.5625107133053, -86.534089486372], icon: redIcon},
+            {name: "Placemark 150", coords: [30.6060465015695, -86.1450983517499], icon: redIcon},
+            {name: "Placemark 151", coords: [30.6123126851693, -86.1422219304716], icon: redIcon},
+            {name: "Placemark 152", coords: [30.6119820607016, -86.1205452032189], icon: redIcon},
+            {name: "Placemark 153", coords: [30.5785090836125, -86.1095859879252], icon: redIcon},
+            {name: "Placemark 154", coords: [30.5525115442149, -86.1119451986221], icon: redIcon},
+            {name: "Placemark 155", coords: [30.5529176737333, -86.112391319923], icon: redIcon},
+            {name: "Placemark 156", coords: [30.477686003999, -86.4957621566422], icon: redIcon},
+            {name: "Placemark 157", coords: [30.482447968589, -86.4818239146275], icon: redIcon},
+            {name: "Placemark 158", coords: [30.4819447800783, -86.4820469762964], icon: redIcon},
+            {name: "Placemark 159", coords: [30.4815431597542, -86.4824135773162], icon: redIcon},
+            {name: "Placemark 16", coords: [30.5617706590233, -86.5363568604844], icon: redIcon},
+            {name: "Placemark 160", coords: [30.4812932222958, -86.4820121474008], icon: redIcon},
+            {name: "Placemark 161", coords: [30.4818351618143, -86.4811417074334], icon: redIcon},
+            {name: "Placemark 162", coords: [30.4813895710486, -86.4813843370553], icon: redIcon},
+            {name: "Placemark 163", coords: [30.4815273783878, -86.4805020179762], icon: redIcon},
+            {name: "Placemark 164", coords: [30.4811322314881, -86.4806464574333], icon: redIcon},
+            {name: "Placemark 165", coords: [30.4554634833097, -86.4235236137748], icon: redIcon},
+            {name: "Placemark 166", coords: [30.4543672133591, -86.4216953901268], icon: redIcon},
+            {name: "Placemark 167", coords: [30.4744785220638, -86.3086646639389], icon: redIcon},
+            {name: "Placemark 168", coords: [30.472527123245, -86.3041781953981], icon: redIcon},
+            {name: "Placemark 169", coords: [30.4723648647911, -86.3035536036408], icon: redIcon},
+            {name: "Placemark 17", coords: [30.4649445533997, -86.636797992436], icon: redIcon},
+            {name: "Placemark 18", coords: [30.4081153679258, -86.6946954927026], icon: redIcon},
+            {name: "Placemark 19", coords: [30.4081434927425, -86.6953154009383], icon: redIcon},
+            {name: "Placemark 2", coords: [30.5060985994703, -86.6637443182261], icon: redIcon},
+            {name: "Placemark 2 (1)", coords: [30.4841941428192, -86.5837331684486], icon: redIcon},
+            {name: "Placemark 2 (2)", coords: [30.6059242987527, -86.4510945734273], icon: redIcon},
+            {name: "Placemark 20", coords: [30.4068121606363, -86.6953977439893], icon: redIcon},
+            {name: "Placemark 21", coords: [30.4070969318197, -86.6969999018881], icon: redIcon},
+            {name: "Placemark 22", coords: [30.4071768503886, -86.6974897394332], icon: redIcon},
+            {name: "Placemark 23", coords: [30.4084512993255, -86.699854950377], icon: redIcon},
+            {name: "Placemark 24", coords: [30.4109881632019, -86.7000210657676], icon: redIcon},
+            {name: "Placemark 25", coords: [30.4086110778854, -86.7139093460087], icon: redIcon},
+            {name: "Placemark 26", coords: [30.4126358662414, -86.7110306813425], icon: redIcon},
+            {name: "Placemark 27", coords: [30.4142925356469, -86.7137720559102], icon: redIcon},
+            {name: "Placemark 28", coords: [30.476486492766, -86.5885208341937], icon: redIcon},
+            {name: "Placemark 29", coords: [30.476376860478, -86.588888416395], icon: redIcon},
+            {name: "Placemark 3", coords: [30.5046858130769, -86.6639411509022], icon: redIcon},
+            {name: "Placemark 3 (1)", coords: [30.482348588885, -86.5860181575265], icon: redIcon},
+            {name: "Placemark 3 (2)", coords: [30.6055658604646, -86.4500636513482], icon: redIcon},
+            {name: "Placemark 30", coords: [30.4762355027304, -86.5892737311127], icon: redIcon},
+            {name: "Placemark 31", coords: [30.4761907894737, -86.5896353870979], icon: redIcon},
+            {name: "Placemark 32", coords: [30.4763224940772, -86.590093306507], icon: redIcon},
+            {name: "Placemark 33", coords: [30.4803886526985, -86.5897681572892], icon: redIcon},
+            {name: "Placemark 34", coords: [30.4803547706781, -86.5903625572016], icon: redIcon},
+            {name: "Placemark 35", coords: [30.4802419559533, -86.5908515002786], icon: redIcon},
+            {name: "Placemark 36", coords: [30.4715209341054, -86.5673128497867], icon: redIcon},
+            {name: "Placemark 37", coords: [30.4704161785788, -86.5669428992811], icon: redIcon},
+            {name: "Placemark 38", coords: [30.4757553570101, -86.5108898276934], icon: redIcon},
+            {name: "Placemark 39", coords: [30.4745381597136, -86.5118075611324], icon: redIcon},
+            {name: "Placemark 4", coords: [30.5064440177415, -86.6630782766102], icon: redIcon},
+            {name: "Placemark 4 (1)", coords: [30.4823859627294, -86.5864286895841], icon: redIcon},
+            {name: "Placemark 40", coords: [30.4737453061632, -86.5108483687769], icon: redIcon},
+            {name: "Placemark 41", coords: [30.4733981143469, -86.5108546431919], icon: redIcon},
+            {name: "Placemark 42", coords: [30.5165155861936, -86.6823919295709], icon: redIcon},
+            {name: "Placemark 43", coords: [30.5176096676159, -86.6816064674366], icon: redIcon},
+            {name: "Placemark 44", coords: [30.5173228090378, -86.6838001742668], icon: redIcon},
+            {name: "Placemark 45", coords: [30.5165132883654, -86.6828451525585], icon: redIcon},
+            {name: "Placemark 46", coords: [30.6866734322883, -86.5698815768573], icon: redIcon},
+            {name: "Placemark 47", coords: [30.685374443402, -86.5713489540316], icon: redIcon},
+            {name: "Placemark 48", coords: [30.6819465641797, -86.5777553154362], icon: redIcon},
+            {name: "Placemark 49", coords: [30.6810488301199, -86.5815686546578], icon: redIcon},
+            {name: "Placemark 5", coords: [30.5061586880949, -86.6631291607414], icon: redIcon},
+            {name: "Placemark 5 (1)", coords: [30.4824864909036, -86.5869629685939], icon: redIcon},
+            {name: "Placemark 50", coords: [30.6812457127936, -86.567325506402], icon: redIcon},
+            {name: "Placemark 51", coords: [30.6786967860476, -86.5704969990011], icon: redIcon},
+            {name: "Placemark 52", coords: [30.6783532679607, -86.5719663266983], icon: redIcon},
+            {name: "Placemark 53", coords: [30.6550897081095, -86.5751575863179], icon: redIcon},
+            {name: "Placemark 54", coords: [30.6875027492723, -86.6230257191761], icon: redIcon},
+            {name: "Placemark 55", coords: [30.524352424638, -86.9323183249683], icon: redIcon},
+            {name: "Placemark 56", coords: [30.5577384875404, -86.7603548419201], icon: redIcon},
+            {name: "Placemark 57", coords: [30.5574707354442, -86.7601188673493], icon: redIcon},
+            {name: "Placemark 58", coords: [30.5722548280136, -86.8926392547013], icon: redIcon},
+            {name: "Placemark 59", coords: [30.5720349939553, -86.895028058369], icon: redIcon},
+            {name: "Placemark 6", coords: [30.5058128098087, -86.66300777595], icon: redIcon},
+            {name: "Placemark 6 (1)", coords: [30.48293960286, -86.5868244062014], icon: redIcon},
+            {name: "Placemark 60", coords: [30.5769077609483, -86.8976771009505], icon: redIcon},
+            {name: "Placemark 61", coords: [30.5784908743001, -86.8982567142001], icon: redIcon},
+            {name: "Placemark 62", coords: [30.5783260840018, -86.8988636819114], icon: redIcon},
+            {name: "Placemark 63", coords: [30.5581785512975, -86.9207722949226], icon: redIcon},
+            {name: "Placemark 64", coords: [30.5649172318647, -86.9211588360534], icon: redIcon},
+            {name: "Placemark 65", coords: [30.5660332085187, -86.9226666486689], icon: redIcon},
+            {name: "Placemark 66", coords: [30.5682097292003, -86.9227591626449], icon: redIcon},
+            {name: "Placemark 67", coords: [30.5686283884151, -86.9220557442035], icon: redIcon},
+            {name: "Placemark 68", coords: [30.6051696383124, -86.4503040560124], icon: redIcon},
+            {name: "Placemark 69", coords: [30.6048621881985, -86.4502078355364], icon: redIcon},
+            {name: "Placemark 7", coords: [30.5072787372785, -86.6671834320777], icon: redIcon},
+            {name: "Placemark 7 (1)", coords: [30.4765879516755, -86.5855840611987], icon: redIcon},
+            {name: "Placemark 70", coords: [30.604461628708, -86.4499621682113], icon: redIcon},
+            {name: "Placemark 71", coords: [30.6041371572333, -86.4495616412769], icon: redIcon},
+            {name: "Placemark 72", coords: [30.6043076647044, -86.4488606935509], icon: redIcon},
+            {name: "Placemark 73", coords: [30.6045901144813, -86.4490468667903], icon: redIcon},
+            {name: "Placemark 74", coords: [30.6050206642385, -86.449541510815], icon: redIcon},
+            {name: "Placemark 75", coords: [30.5357393629068, -86.4576274072884], icon: redIcon},
+            {name: "Placemark 76", coords: [30.5342259524904, -86.4573387956218], icon: redIcon},
+            {name: "Placemark 77", coords: [30.7066852200133, -86.3841223643215], icon: redIcon},
+            {name: "Placemark 78", coords: [30.7063687681849, -86.3845512999766], icon: redIcon},
+            {name: "Placemark 79", coords: [30.7067238941162, -86.3855954415347], icon: redIcon},
+            {name: "Placemark 8 (1)", coords: [30.478951040141, -86.5880882146917], icon: redIcon},
+            {name: "Placemark 80", coords: [30.7061820299719, -86.3857679899173], icon: redIcon},
+            {name: "Placemark 81", coords: [30.6653477582856, -86.3894249716305], icon: redIcon},
+            {name: "Placemark 82", coords: [30.6390754526378, -86.4039110541602], icon: redIcon},
+            {name: "Placemark 83", coords: [30.5238939178317, -86.3877085514321], icon: redIcon},
+            {name: "Placemark 84", coords: [30.7207804865265, -86.3294022953768], icon: redIcon},
+            {name: "Placemark 85", coords: [30.6596822976536, -86.2883960140762], icon: redIcon},
+            {name: "Placemark 86", coords: [30.6591380121141, -86.2889438329205], icon: redIcon},
+            {name: "Placemark 87", coords: [30.718709563864, -86.2711324671061], icon: redIcon},
+            {name: "Placemark 88", coords: [30.5640210062083, -86.2491562303453], icon: redIcon},
+            {name: "Placemark 89", coords: [30.5507026191329, -86.2507868796864], icon: redIcon},
+            {name: "Placemark 90", coords: [30.7095903995526, -86.2472025244843], icon: redIcon},
+            {name: "Placemark 91", coords: [30.709561721503, -86.2426245316043], icon: redIcon},
+            {name: "Placemark 92", coords: [30.7102615199556, -86.2303560095313], icon: redIcon},
+            {name: "Placemark 93", coords: [30.7152984484178, -86.2246773073428], icon: redIcon},
+            {name: "Placemark 94", coords: [30.7033549673673, -86.2252354787097], icon: redIcon},
+            {name: "Placemark 95", coords: [30.6992259492028, -86.2274952505417], icon: redIcon},
+            {name: "Placemark 96", coords: [30.5349197458474, -86.2404084671382], icon: redIcon},
+            {name: "Placemark 97", coords: [30.5341987326004, -86.2364628724988], icon: redIcon},
+            {name: "Placemark 98", coords: [30.5323638211911, -86.2297606487695], icon: redIcon},
+            {name: "Placemark 99", coords: [30.5165224386393, -86.2322529609598], icon: redIcon}
+        ];
+
+        // Add markers to map
+        placemarks.forEach(pm => {
+            L.marker(pm.coords, {icon: pm.icon})
+                .addTo(map)
+                .bindPopup(`<b>${pm.name}</b>`);
+        });
+
+        // Fit map to show all markers
+        const allCoords = placemarks.map(pm => pm.coords).concat(lineCoordinates);
+        const bounds = L.latLngBounds(allCoords);
+        map.fitBounds(bounds, {padding: [50, 50]});
+    </script>
+</body>
+</html>
